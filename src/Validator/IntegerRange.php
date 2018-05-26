@@ -15,7 +15,7 @@
  * The above copyright notice and this permission notice shall be included in
  * all licensed copies of the Software.
  */
-namespace District5\Validate;
+namespace District5\Validator;
 
 /**
  * IntegerRange
@@ -62,7 +62,7 @@ class IntegerRange extends Integer
     /**
      * (non-PHPdoc)
      *
-     * @see \District5\Validate\Numeric::isValid()
+     * @see \District5\Validator\Numeric::isValid()
      */
     public function isValid($value)
     {

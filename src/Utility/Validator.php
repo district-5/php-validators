@@ -24,7 +24,7 @@ namespace District5\Utility;
  *
  * @author Mark Morgan
  */
-class Validate
+class Validator
 {
 
     /**
@@ -36,7 +36,7 @@ class Validate
      */
     public static function IsValidBool($value)
     {
-        $validator = new \District5\Validate\BoolValue();
+        $validator = new \District5\Validator\BoolValue();
 
         return $validator->isValid($value);
     }
@@ -50,7 +50,7 @@ class Validate
      */
     public static function IsValidGoogleDatastoreAutoId($value)
     {
-        $validator = new \District5\Validate\GoogleDatastoreAutoId();
+        $validator = new \District5\Validator\GoogleDatastoreAutoId();
 
         return $validator->isValid($value);
     }
@@ -65,7 +65,7 @@ class Validate
      */
     public static function IsValidMongoId($value, $strict = false)
     {
-        $validator = new \District5\Validate\MongoId($strict);
+        $validator = new \District5\Validator\MongoId($strict);
 
         return $validator->isValid($value);
     }

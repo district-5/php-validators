@@ -15,7 +15,7 @@
  * The above copyright notice and this permission notice shall be included in
  * all licensed copies of the Software.
  */
-namespace District5\Validate;
+namespace District5\Validator;
 
 /**
  * MongoId
@@ -52,7 +52,7 @@ class MongoId extends Regex
 	/**
 	 * (non-PHPdoc)
 	 * 
-	 * @see \District5\Validate\I::isValid()
+	 * @see \District5\Validator\I::isValid()
 	 */
 	public function isValid($value)
 	{
