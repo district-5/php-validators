@@ -1,0 +1,55 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "42392012b5f283d6381ebabbb811a9a6",
+    "packages": [
+        {
+            "name": "district5/validator",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@bitbucket.district5.co.uk/d5libs/validator.git",
+                "reference": "8f645701020977322390de7c064fc21916b4a159"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "District5\\": "src/"
+                }
+            },
+            "license": [
+                "Proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Morgan",
+                    "email": "mark.morgan@district5.co.uk"
+                }
+            ],
+            "description": "District5 Validator Library",
+            "homepage": "https://bitbucket.district5.co.uk/projects/D5LIBS/repos/validator/browse",
+            "keywords": [
+                "district5",
+                "php",
+                "validator"
+            ],
+            "time": "2018-05-26T10:03:31+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.4.0"
+    },
+    "platform-dev": []
+}
