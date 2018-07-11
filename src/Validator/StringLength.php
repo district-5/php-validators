@@ -55,7 +55,7 @@ class StringLength extends A
 		
 //		if (!isset($options['exact']) && !isset($options['max']))
 //			throw new \InvalidArgumentException('Either an "exact" value or "min" and|or "max" values must be set');
-		
+
 		if (isset($options['exact']))
 		{
 			$this->_min = $options['exact'];
@@ -72,7 +72,10 @@ class StringLength extends A
 
         if (null === $this->_min && null === $this->_max)
             throw new \InvalidArgumentException('No values for "min" or "max" have been set');
-		
+
+        $this->_errorMessages['too_short'] = 'Value is below the minimum string length';
+        $this->_errorMessages['too_long'] = 'Value exceeds the maximum string length';
+
 		parent::__construct($options);
 	}
 	
