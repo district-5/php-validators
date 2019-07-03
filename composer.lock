@@ -8,11 +8,11 @@
     "packages": [
         {
             "name": "district5/validator",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "ssh://git@bitbucket.district5.co.uk/d5libs/validator.git",
-                "reference": "8f645701020977322390de7c064fc21916b4a159"
+                "reference": "038c544537a7ddf0cd0b563879060cbcbc750392"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -39,7 +39,7 @@
                 "php",
                 "validator"
             ],
-            "time": "2018-05-26T10:03:31+00:00"
+            "time": "2018-05-26T11:22:43+00:00"
         }
     ],
     "packages-dev": [],
