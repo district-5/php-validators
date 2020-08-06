@@ -29,19 +29,61 @@ namespace District5\Validator;
  * ------------------------------------------------------------
  *
  * @author Mark Morgan <mark.morgan@district5.co.uk>
+ * @author Roger Thomas <roger.thomas@district5.co.uk>
  */
 class EmailAddress extends A
 {
-	
-	/**
+    /**
+     * @var bool
+     */
+    protected $deepCheck = false;
+
+    /**
+     * EmailAddress constructor.
+     * @param array $options
+     */
+	public function __construct($options = array())
+    {
+        parent::__construct($options);
+        if (array_key_exists('deep', $options) && $options['deep'] === true) {
+            $this->deepCheck = true;
+        }
+    }
+
+    /**
 	 * (non-PHPdoc)
 	 *
 	 * @see \District5\Validator\I::isValid()
 	 */
 	public function isValid($value)
 	{
-        return $this->check_email_address($value);
+	    $check = $this->check_email_address($value);
+	    if ($this->deepCheck === false || $check === false) {
+            return $check;
+        }
+	    return $this->performMxVerification(
+	        $value
+        );
 	}
+
+    /**
+     * Perform a deep check on the domain part of the email address.
+     *
+     * @param string $value
+     * @return bool
+     */
+    protected function performMxVerification($value)
+    {
+        $email = explode('@', $value);
+        if (count($email) !== 2) {
+            return false;
+        }
+
+        $domain = $email[1];
+        $records = dns_get_record($domain, DNS_MX);
+
+        return count($records) > 0;
+    }
 	
 	/**
 	 * Check email address validity
