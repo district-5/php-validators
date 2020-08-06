@@ -22,5 +22,11 @@
   },
   "autoload": {
     "psr-4": { "District5\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "District5Tests\\": "tests/" }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7"
   }
 }
