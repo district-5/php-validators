@@ -4,3 +4,4 @@ build
 .vagrant
 vendor
 composer.lock
+auth.json
