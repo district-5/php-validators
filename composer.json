@@ -8,12 +8,16 @@
     {
       "name": "Mark Morgan",
       "email": "mark.morgan@district5.co.uk"
+    },
+    {
+      "name": "Roger Thomas",
+      "email": "roger.thomas@district5.co.uk"
     }
   ],
   "repositories": [
     {
       "type": "vcs",
-      "url": "ssh://git@bitbucket.district5.co.uk/d5libs/validator.git"
+      "url": "git@github.com:district-5/php-validator.git"
     }
   ],
   "require": {
