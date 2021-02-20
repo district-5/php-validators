@@ -8,18 +8,14 @@
  * @author District5
  * @link https://www.district5.co.uk
  *
- * @license This software and associated documentation (the "Software") may not be
- * used, copied, modified, distributed, published or licensed to any 3rd party
- * without the written permission of District5 or its author.
+ * @license MIT
  *
  * The above copyright notice and this permission notice shall be included in
- * all licensed copies of the Software.
+ * all copies of the Software.
  */
 namespace District5\Validator;
 
 /**
- * Email
- *
  * Integrated into validator structure from EmailAddressValidator Class
  * ------------------------------------------------------------
  * http://code.google.com/p/php-email-address-validation/
@@ -28,8 +24,8 @@ namespace District5\Validator;
  * http://www.opensource.org/licenses/bsd-license.php
  * ------------------------------------------------------------
  *
- * @author Mark Morgan <mark.morgan@district5.co.uk>
- * @author Roger Thomas <roger.thomas@district5.co.uk>
+ * @author District5
+ * @package District5\Validator
  */
 class EmailAddress extends A
 {
@@ -57,13 +53,17 @@ class EmailAddress extends A
 	 */
 	public function isValid($value)
 	{
-	    $check = $this->check_email_address($value);
-	    if ($this->deepCheck === false || $check === false) {
-            return $check;
+	    $isValid = $this->check_email_address($value);
+	    if ($isValid === false) {
+	        return false;
         }
-	    return $this->performMxVerification(
-	        $value
-        );
+
+	    if ($this->deepCheck === false) {
+	        // if we dont want to do a deep check and we get this far, it passed the initial regex check
+            return true;
+        }
+
+	    return $this->performMxVerification($value);
 	}
 
     /**

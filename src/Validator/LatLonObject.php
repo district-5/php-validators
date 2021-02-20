@@ -8,25 +8,21 @@
  * @author District5
  * @link https://www.district5.co.uk
  *
- * @license This software and associated documentation (the "Software") may not be
- * used, copied, modified, distributed, published or licensed to any 3rd party
- * without the written permission of District5 or its author.
+ * @license MIT
  *
  * The above copyright notice and this permission notice shall be included in
- * all licensed copies of the Software.
+ * all copies of the Software.
  */
 namespace District5\Validator;
 
 /**
- * LatLonObject
- *
  * Validates whether a value is an object with latitude and longitude properties
  *
- * @author Mark Morgan <mark.morgan@district5.co.uk>
+ * @author District5
+ * @package District5\Validator
  */
 class LatLonObject extends A
 {
-
     protected $_requiresHorizontalAccuracy = false;
 
     /**
@@ -49,8 +45,7 @@ class LatLonObject extends A
      */
     public function isValid($value)
     {
-        if (null === $value)
-        {
+        if (null === $value) {
             $this->setLastErrorMessage('Missing value for lat lon object');
             return false;
         }
@@ -59,32 +54,28 @@ class LatLonObject extends A
         $lon = null;
         $accuracyHorizontal = null;
 
-        if ($value instanceof \stdClass)
-        {
+        if ($value instanceof \stdClass) {
             // find the latitude value
-            if (property_exists($value, 'lat'))
+            if (property_exists($value, 'lat')) {
                 $lat = $value->lat;
-            elseif (property_exists($value, 'latitude'))
+            } elseif (property_exists($value, 'latitude')) {
                 $lat = $value->latitude;
-            else
-            {
+            } else {
                 $this->setLastErrorMessage('Missing property for "lat" or "latitude"');
                 return false;
             }
 
             // find the longitude value
-            if (property_exists($value, 'lon'))
+            if (property_exists($value, 'lon')) {
                 $lon = $value->lon;
-            elseif (property_exists($value, 'longitude'))
+            } elseif (property_exists($value, 'longitude')) {
                 $lon = $value->longitude;
-            else
-            {
+            } else {
                 $this->setLastErrorMessage('Missing property for "lon" or "longitude"');
                 return false;
             }
 
-            if ($this->_requiresHorizontalAccuracy === true)
-            {
+            if ($this->_requiresHorizontalAccuracy === true) {
                 if (property_exists($value, 'accuracy_horizontal')) {
                     $accuracyHorizontal = $value->accuracy_horizontal;
                 } else {
@@ -96,29 +87,26 @@ class LatLonObject extends A
         elseif (is_array($value))
         {
             // find the latitude value
-            if (array_key_exists('lat', $value))
+            if (array_key_exists('lat', $value)) {
                 $lat = $value['lat'];
-            elseif (array_key_exists('latitude', $value))
+            } elseif (array_key_exists('latitude', $value)) {
                 $lat = $value['latitude'];
-            else
-            {
+            } else {
                 $this->setLastErrorMessage('Missing property for "lat" or "latitude"');
                 return false;
             }
 
             // find the longitude value
-            if (array_key_exists('lon', $value))
+            if (array_key_exists('lon', $value)) {
                 $lon = $value['lon'];
-            elseif (array_key_exists('longitude', $value))
+            } elseif (array_key_exists('longitude', $value)) {
                 $lon = $value['longitude'];
-            else
-            {
+            } else {
                 $this->setLastErrorMessage('Missing property for "lon" or "longitude"');
                 return false;
             }
 
-            if ($this->_requiresHorizontalAccuracy === true)
-            {
+            if ($this->_requiresHorizontalAccuracy === true) {
                 if (array_key_exists('accuracy_horizontal', $value)) {
                     $accuracyHorizontal = $value['accuracy_horizontal'];
                 } else {
@@ -126,9 +114,7 @@ class LatLonObject extends A
                     return false;
                 }
             }
-        }
-        else
-        {
+        } else {
             $this->setLastErrorMessage('Unrecognised structure for item');
             return false;
         }
@@ -136,35 +122,32 @@ class LatLonObject extends A
         $latValidator = new NumericRange(array('min' => -90, 'max' => 90));
         $lonValidator = new NumericRange(array('min' => -180, 'max' => 180));
 
-        if ($latValidator->isValid($lat) === false)
-        {
+        if ($latValidator->isValid($lat) === false) {
             $this->setLastErrorMessage('Latitude failed to validate as a numeric value between the range -90 to 90');
             return false;
         }
 
-        if ($lonValidator->isValid($lon) === false)
-        {
+        if ($lonValidator->isValid($lon) === false) {
             $this->setLastErrorMessage('Longitude failed to validate as a numeric value between the range -180 to 180');
             return false;
         }
 
-        if ($this->_requiresHorizontalAccuracy === true)
-        {
-            if ($accuracyHorizontal === null)
-            {
+        if ($this->_requiresHorizontalAccuracy === true) {
+
+            if ($accuracyHorizontal === null) {
                 $this->setLastErrorMessage('Missing value for "accuracy_horizontal"');
                 return false;
             }
 
             $accuracyHorizontalValidator = new NumericRange(array('min' => -100000, 'max' => 100000));
-            if ($accuracyHorizontalValidator->isValid($accuracyHorizontal) === false)
-            {
+            if ($accuracyHorizontalValidator->isValid($accuracyHorizontal) === false) {
                 $this->setLastErrorMessage('Horizontal accuracy failed to validate as a numeric value between the range -100000 to 100000: "' . (string)$accuracyHorizontal . '"');
                 return false;
             }
 
-            if ($accuracyHorizontal < 0)
+            if ($accuracyHorizontal < 0) {
                 error_log('Horizontal accuracy is less than 0: " ' . (string)$accuracyHorizontal . '"');
+            }
         }
 
         return true;

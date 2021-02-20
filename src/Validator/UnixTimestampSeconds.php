@@ -8,21 +8,18 @@
  * @author District5
  * @link https://www.district5.co.uk
  *
- * @license This software and associated documentation (the "Software") may not be
- * used, copied, modified, distributed, published or licensed to any 3rd party
- * without the written permission of District5 or its author.
+ * @license MIT
  *
  * The above copyright notice and this permission notice shall be included in
- * all licensed copies of the Software.
+ * all copies of the Software.
  */
 namespace District5\Validator;
 
 /**
- * UnixTimestamp
- *
  * Validates whether a value is a Unix Timestamp
  *
- * @author Mark Morgan <mark.morgan@district5.co.uk>
+ * @author District5
+ * @package District5\Validator
  */
 class UnixTimestampSeconds extends Integer
 {
@@ -33,11 +30,13 @@ class UnixTimestampSeconds extends Integer
      */
     public function isValid($value)
     {
-        if (false === parent::isValid($value))
+        if (false === parent::isValid($value)) {
             return false;
+        }
 
-        if ($value >= 0)
+        if ($value >= 0) {
             return true;
+        }
 
         return false;
     }
