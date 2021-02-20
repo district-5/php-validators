@@ -53,13 +53,12 @@ class NumericSpecificValues extends Numeric
      */
     public function isValid($value)
     {
-        // TODO: does this even work???
-        if (!parent::isValid($value)) {
+        if (parent::isValid($value) === false) {
             return false;
         }
 
         foreach ($this->_values as $allowedValue) {
-            if ($value == $allowedValue) {
+            if ($value === $allowedValue) {
                 return true;
             }
         }
