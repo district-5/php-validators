@@ -2,16 +2,12 @@
   "name": "district5/validators",
   "description": "District5 Validators Library",
   "keywords": ["php", "district5", "validators"],
-  "homepage": "https://bitbucket.district5.co.uk/projects/D5LIBS/repos/validators/browse",
+  "homepage": "https://github.com/district-5/php-validators",
   "license": "Proprietary",
   "authors": [
     {
-      "name": "Mark Morgan",
-      "email": "mark.morgan@district5.co.uk"
-    },
-    {
-      "name": "Roger Thomas",
-      "email": "roger.thomas@district5.co.uk"
+      "name": "District5",
+      "email": "hello@district5.co.uk"
     }
   ],
   "repositories": [
@@ -22,7 +18,7 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "district5/validator": "1.*"
+    "district5/validator": ">=1.0.3"
   },
   "autoload": {
     "psr-4": { "District5\\": "src/" }
