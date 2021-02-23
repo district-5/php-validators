@@ -8,25 +8,21 @@
  * @author District5
  * @link https://www.district5.co.uk
  *
- * @license This software and associated documentation (the "Software") may not be
- * used, copied, modified, distributed, published or licensed to any 3rd party
- * without the written permission of District5 or its author.
+ * @license MIT
  *
  * The above copyright notice and this permission notice shall be included in
- * all licensed copies of the Software.
+ * all copies of the Software.
  */
 namespace District5\Validator;
 
 /**
- * Integer
- *
  * Validates whether a value is an integer
  *
- * @author Mark Morgan <mark.morgan@district5.co.uk>
+ * @author District5
+ * @package District5\Validator
  */
 class Integer extends A
 {
-	
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -34,11 +30,13 @@ class Integer extends A
 	 */
 	public function isValid($value)
 	{
-        if (is_int($value))
+        if (is_int($value)) {
             return true;
+        }
 
-        if (intval($value) == $value)
+        if (intval($value) == $value) {
             return true;
+        }
 
         return false;
 	}

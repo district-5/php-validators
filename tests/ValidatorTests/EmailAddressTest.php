@@ -1,6 +1,6 @@
 <?php
 
-namespace District5\ValidatorTests\Adapters;
+namespace District5\ValidatorTests;
 
 use District5\Validator\BoolValue;
 use District5\Validator\EmailAddress;

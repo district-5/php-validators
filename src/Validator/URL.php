@@ -8,25 +8,21 @@
  * @author District5
  * @link https://www.district5.co.uk
  *
- * @license This software and associated documentation (the "Software") may not be
- * used, copied, modified, distributed, published or licensed to any 3rd party
- * without the written permission of District5 or its author.
+ * @license MIT
  *
  * The above copyright notice and this permission notice shall be included in
- * all licensed copies of the Software.
+ * all copies of the Software.
  */
 namespace District5\Validator;
 
 /**
- * URL
- *
  * Validates whether a value is in the format of a url
  *
- * @author Mark Morgan <mark.morgan@district5.co.uk>
+ * @author District5
+ * @package District5\Validator
  */
 class URL extends A
 {
-
     protected static $SCHEME_PATTERN = '/^[a-z][a-z0-9+\.-]*$/Di';
 
     /**
@@ -79,8 +75,9 @@ class URL extends A
     {
         parent::__construct();
 
-        if (null !== $allowedSchemes)
+        if (null !== $allowedSchemes) {
             $this->setSchemes($allowedSchemes);
+        }
     }
 
     /**

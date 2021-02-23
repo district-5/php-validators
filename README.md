@@ -1,29 +1,47 @@
-Validators
-==========
+# Validators
+A collection of validators implementing / extending the [District5 Validator](https://github.com/district-5/php-validator) library.
 
-A collection of many validators.
+## Installation
+Install using composer:
+```bash
+composer require district5/validators
+```
 
-Testing:
---------
+## Testing:
 
 ```
 $ composer install
 $ ./vendor/bin/phpunit
 ```
 
-Adapters:
----------
+## Usage
+### General
+Most validator work in the same way:
+```php
+$validValue = true;
+$invalidValue = 'Hello';
 
-* `EmailAddress` - Validate an email address format.
-    * ```php
-      <?php
-      // Simple format check:
-      $adapter = new \District5\Validator\EmailAddress();
-      $adapter->isValid('foo@gmail.com'); // returns true
-      
-      // Deeper check, which includes MX record lookup:
-      $adapter = new \District5\Validator\EmailAddress(
-          ['deep' => true]
-      );
-      $adapter->isValid('foo@gmail.com'); // returns true
-      ```
+$validator = new \District5\Validator\BoolValue();
+
+$validator->isValid($validValue);   // true
+$validator->isValid($invalidValue);   // false
+```
+
+Some validators have configuration options that can be specified at construction time:
+
+### EmailAddress
+Validate an email address:
+```php
+<?php
+// Simple format check:
+$validator = new \District5\Validator\EmailAddress();
+$validator->isValid('foo@gmail.com'); // true
+
+// Deeper check, which includes MX record lookup:
+$validator = new \District5\Validator\EmailAddress(
+    ['deep' => true]
+);
+
+$validator->isValid('foo@gmail.com'); // true
+$validator->isValid('foo@domainthatdoesntexist.com'); // false
+```
