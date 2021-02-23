@@ -7,13 +7,6 @@ Install using composer:
 composer require district5/validators
 ```
 
-## Testing:
-
-```
-$ composer install
-$ ./vendor/bin/phpunit
-```
-
 ## Usage
 ### General
 Most validator work in the same way:
@@ -44,4 +37,10 @@ $validator = new \District5\Validator\EmailAddress(
 
 $validator->isValid('foo@gmail.com'); // true
 $validator->isValid('foo@domainthatdoesntexist.com'); // false
+```
+
+## Testing:
+```
+$ composer install
+$ ./vendor/bin/phpunit
 ```
