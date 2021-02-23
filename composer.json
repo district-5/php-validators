@@ -3,7 +3,7 @@
   "description": "District5 Validators Library",
   "keywords": ["php", "district5", "validators"],
   "homepage": "https://github.com/district-5/php-validators",
-  "license": "Proprietary",
+  "license": "MIT",
   "authors": [
     {
       "name": "District5",
