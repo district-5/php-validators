@@ -31,10 +31,9 @@
 namespace District5\Validators;
 
 /**
- * Validates whether a value is in the format of a domain name
+ * DomainName
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is in the format of a domain name.
  */
 class DomainName extends Regex
 {
@@ -44,13 +43,5 @@ class DomainName extends Regex
      *
      * @var string
      */
-    protected static $PATTERN = '/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,}$/';
-
-    /**
-     * Creates a new instance of DomainName
-     */
-    public function __construct()
-    {
-        parent::__construct(static::$PATTERN);
-    }
+    protected $pattern = '/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,}$/';
 }

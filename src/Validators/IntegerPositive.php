@@ -31,14 +31,20 @@
 namespace District5\Validators;
 
 /**
- * Validates whether a value is a positive integer
+ * IntegerPositive
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is a positive integer.
  */
 class IntegerPositive extends Integer
 {
-	/**
+    public function __construct(array $options = [])
+    {
+        parent::__construct($options);
+
+        $this->errorMessages['notPositive'] = 'The integer value is not positive';
+    }
+
+    /**
 	 * (non-PHPdoc)
 	 *
 	 * @see \District5\Validators\I::isValid()
@@ -50,6 +56,7 @@ class IntegerPositive extends Integer
         }
 
         if ($value < 1) {
+            $this->setLastErrorMessage('notPositive');
             return false;
         }
 

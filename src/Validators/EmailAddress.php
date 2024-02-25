@@ -33,6 +33,8 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
+ * EmailAddress
+ *
  * Integrated into validator structure from EmailAddressValidator Class
  * ------------------------------------------------------------
  * http://code.google.com/p/php-email-address-validation/
@@ -40,12 +42,21 @@ use \District5\Validator\AbstractValidator;
  * Released under New BSD license
  * http://www.opensource.org/licenses/bsd-license.php
  * ------------------------------------------------------------
- *
- * @author District5
- * @package District5\Validator
  */
 class EmailAddress extends AbstractValidator
 {
+    /**
+     * @var string[]
+     */
+    protected $errorMessages = [
+        'generic' => 'Email address invalid',
+        'dnsMxVerificationFailed' => 'Email address domain failed MX records lookup',
+        'missingAtSymbol' => 'Email address is missing @ symbol',
+        'tooManyAtSymbols' => 'Email address has more than 1x @ symbol',
+        'tooShort' => 'Email address too short',
+        'tooLong' => 'Email address too long'
+    ];
+
     /**
      * @var bool
      */
@@ -55,10 +66,11 @@ class EmailAddress extends AbstractValidator
      * EmailAddress constructor.
      * @param array $options
      */
-	public function __construct($options = array())
+	public function __construct(array $options = [])
     {
         parent::__construct($options);
-        if (array_key_exists('deep', $options) && $options['deep'] === true) {
+
+        if (isset($options['deep']) && $options['deep'] === true) {
             $this->deepCheck = true;
         }
     }
@@ -80,7 +92,12 @@ class EmailAddress extends AbstractValidator
             return true;
         }
 
-	    return $this->performMxVerification($value);
+	    $passesMxVerification = $this->performMxVerification($value);
+        if (false === $passesMxVerification) {
+            $this->setLastErrorMessage('dnsMxVerificationFailed');
+        }
+
+        return $passesMxVerification;
 	}
 
     /**
@@ -89,7 +106,7 @@ class EmailAddress extends AbstractValidator
      * @param string $value
      * @return bool
      */
-    protected function performMxVerification($value)
+    protected function performMxVerification(string $value): bool
     {
         $email = explode('@', $value);
         if (count($email) !== 2) {
@@ -109,7 +126,7 @@ class EmailAddress extends AbstractValidator
 	 * 
 	 * @return True if email is valid, false if not
 	 */
-	protected function check_email_address($strEmailAddress)
+	protected function check_email_address(string $strEmailAddress): bool
 	{
 		// If magic quotes is "on", email addresses with quote marks will
 		// fail validation because of added escape characters. Uncommenting
@@ -132,12 +149,12 @@ class EmailAddress extends AbstractValidator
 	
 		// Split it into sections using last instance of "@"
 		$intAtSymbol = strrpos($strEmailAddress, '@');
-		if ($intAtSymbol === false)
-		{
+		if ($intAtSymbol === false) {
 			// No "@" symbol in email.
-			$this->setLastErrorMessage('generic');
+			$this->setLastErrorMessage('missingAtSymbol');
 			return false;
 		}
+
 		$arrEmailAddress[0] = substr($strEmailAddress, 0, $intAtSymbol);
 		$arrEmailAddress[1] = substr($strEmailAddress, $intAtSymbol + 1);
 	
@@ -155,23 +172,20 @@ class EmailAddress extends AbstractValidator
 		$arrTempAddress[1] = $arrEmailAddress[1];
 		$strTempAddress = $arrTempAddress[0] . $arrTempAddress[1];
 		// Then check - should be no "@" symbols.
-		if (strrpos($strTempAddress, '@') !== false)
-		{
+		if (strrpos($strTempAddress, '@') !== false) {
 			// "@" symbol found
-			$this->setLastErrorMessage('generic');
+			$this->setLastErrorMessage('tooManyAtSymbols');
 			return false;
 		}
 	
 		// Check local portion
-		if (!$this->check_local_portion($arrEmailAddress[0]))
-		{
+		if (!$this->check_local_portion($arrEmailAddress[0])) {
 			$this->setLastErrorMessage('generic');
 			return false;
 		}
 	
 		// Check domain portion
-		if (!$this->check_domain_portion($arrEmailAddress[1]))
-		{
+		if (!$this->check_domain_portion($arrEmailAddress[1])) {
 			$this->setLastErrorMessage('generic');
 			return false;
 		}
@@ -187,7 +201,7 @@ class EmailAddress extends AbstractValidator
 	 * 
 	 * @return True if local portion is valid, false if not
 	 */
-	protected function check_local_portion($strLocalPortion)
+	protected function check_local_portion(string $strLocalPortion): bool
 	{
 		// Local portion can only be from 1 to 64 characters, inclusive.
 		// Please note that servers are encouraged to accept longer local
@@ -219,9 +233,9 @@ class EmailAddress extends AbstractValidator
 	 * 
 	 * @param string $strDomainPortion Text to be checked
 	 * 
-	 * @return True if domain portion is valid, false if not
+	 * @return bool True if domain portion is valid, false if not
 	 */
-	protected function check_domain_portion($strDomainPortion)
+	protected function check_domain_portion(string $strDomainPortion): bool
 	{
 		// Total domain can only be from 1 to 255 characters, inclusive
 		if (!$this->check_text_length($strDomainPortion, 1, 255)) {
@@ -245,10 +259,12 @@ class EmailAddress extends AbstractValidator
 				if (!$this->check_text_length($arrDomainPortion[$i], 1, 63)) {
 					return false;
 				}
+
 				if (!preg_match('/^(([A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])|'
 						.'([A-Za-z0-9]+))$/', $arrDomainPortion[$i])) {
 					return false;
 				}
+
 				if ($i == $max - 1) { // TLD cannot be only numbers
 					if (strlen(preg_replace('/[0-9]/', '', $arrDomainPortion[$i])) <= 0) {
 						return false;
@@ -256,6 +272,7 @@ class EmailAddress extends AbstractValidator
 				}
 			}
 		}
+
 		return true;
 	}
 	
@@ -266,24 +283,21 @@ class EmailAddress extends AbstractValidator
 	 * @param int $intMinimum Minimum acceptable length
 	 * @param int $intMaximum Maximum acceptable length
 	 * 
-	 * @return True if string is within bounds (inclusive), false if not
+	 * @return bool True if string is within bounds (inclusive), false if not
 	 */
-	protected function check_text_length($strText, $intMinimum, $intMaximum)
+	protected function check_text_length(string $strText, int $intMinimum, int $intMaximum): bool
 	{
 		// Minimum and maximum are both inclusive
 		$intTextLength = strlen($strText);
-		if ($intTextLength < $intMinimum)
-		{
-			$this->setLastErrorMessage('too_short');
+		if ($intTextLength < $intMinimum) {
+			$this->setLastErrorMessage('tooShort');
 			return false;
-		}
-		else if ($intTextLength > $intMaximum)
-		{
-			$this->setLastErrorMessage('too_long');
+
+		} else if ($intTextLength > $intMaximum) {
+			$this->setLastErrorMessage('tooLong');
 			return false;
-		}
-		else
-		{
+
+		} else {
 			return true;
 		}
 	}

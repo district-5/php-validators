@@ -33,13 +33,19 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
- * Validates whether a value is an integer
+ * Integer
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is an integer (this validator just proxy PHP's is_int and intval functions).
  */
 class Integer extends AbstractValidator
 {
+    /**
+     * @var string[]
+     */
+    protected $errorMessages = [
+        'notInt' => 'The given value is not an integer',
+    ];
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -48,10 +54,12 @@ class Integer extends AbstractValidator
 	public function isValid($value): bool
 	{
         if (is_int($value)) {
+            $this->setLastErrorMessage('notInt');
             return true;
         }
 
         if (intval($value) == $value) {
+            $this->setLastErrorMessage('notInt');
             return true;
         }
 

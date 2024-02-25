@@ -33,13 +33,20 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
- * Validates whether a value is hex value
+ * Hex
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is a hexadecimal value.
  */
 class Hex extends AbstractValidator
 {
+    /**
+     * @var string[]
+     */
+    protected $errorMessages = [
+        'notHex' => 'The given value is not hexadecimal',
+        'valueIncompatibility' => 'The given value must be a string or integer'
+    ];
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -48,10 +55,12 @@ class Hex extends AbstractValidator
 	public function isValid($value): bool
 	{
 		if (!is_string($value) && !is_int($value)) {
+            $this->setLastErrorMessage('valueIncompatibility');
             return false;
         }
 
         if (!ctype_xdigit((string) $value)) {
+            $this->setLastErrorMessage('notHex');
             return false;
         }
 
