@@ -33,13 +33,19 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
- * Validates whether a value consistent with one from a checkbox
+ * CheckboxValue
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is consistent with one expected from a form checkbox.
  */
 class CheckboxValue extends AbstractValidator
 {
+    /**
+     * @var string[]
+     */
+    protected $errorMessages = [
+        'notCheckboxValue' => 'The given value is not a checkbox form item value'
+    ];
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -47,6 +53,15 @@ class CheckboxValue extends AbstractValidator
 	 */
 	public function isValid($value): bool
 	{
-        return ($value == 'on' || $value == 'off');
+        if ($value === 'on') {
+            return true;
+        }
+
+        if ($value === 'off') {
+            return true;
+        }
+
+        $this->setLastErrorMessage('notCheckboxValue');
+        return false;
 	}
 }

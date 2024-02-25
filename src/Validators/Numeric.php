@@ -33,13 +33,19 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
- * Validates whether a value is numeric
+ * Numeric
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is numeric (this validator just proxies PHP's is_numeric function).
  */
 class Numeric extends AbstractValidator
 {
+    /**
+     * @var string[]
+     */
+    protected $errorMessages = [
+        'notNumeric' => 'The given value is not a numeric value'
+    ];
+
     /**
      * (non-PHPdoc)
      *
@@ -47,6 +53,11 @@ class Numeric extends AbstractValidator
      */
     public function isValid($value): bool
     {
-        return is_numeric($value);
+        $isNumeric = is_numeric($value);
+        if (false === $isNumeric) {
+            $this->setLastErrorMessage('notNumeric');
+        }
+
+        return $isNumeric;
     }
 }

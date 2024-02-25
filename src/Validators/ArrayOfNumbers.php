@@ -31,32 +31,52 @@
 namespace District5\Validators;
 
 use \District5\Validator\AbstractValidator;
+use District5\Validators\Numeric as NumericValidator;
 
 /**
- * Validates whether a value is an array of numbers
+ * ArrayOfNumbers
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether an array of values only contains numbers.
  */
 class ArrayOfNumbers extends AbstractValidator
 {
-	/**
+    /**
+     * @var NumericValidator
+     */
+    private $numericValidator;
+
+    public function __construct(array $options = [])
+    {
+        parent::__construct($options);
+
+        $this->numericValidator = new NumericValidator();
+    }
+
+    /**
 	 * (non-PHPdoc)
 	 * 
 	 * @see \District5\Validators\I::isValid()
 	 */
 	public function isValid($value): bool
 	{
-        if (!is_array($value))
+        if (!is_array($value)) {
             return false;
+        }
 
-        $validator = new \District5\Validators\Numeric();
-        foreach ($value as $singleValue)
-        {
-            if (!$validator->isValid($singleValue))
+        foreach ($value as $singleValue) {
+            if (!$this->numericValidator->isValid($singleValue)) {
                 return false;
+            }
         }
 
 		return true;
 	}
+
+    /**
+     * @return string|null
+     */
+    public function getLastErrorMessage(): ?string
+    {
+        $this->numericValidator->getLastErrorMessage();
+    }
 }

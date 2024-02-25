@@ -33,13 +33,19 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
- * Validates whether a value is a boolean
+ * BoolValue
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is a boolean (this validator just proxies PHP's is_bool function).
  */
 class BoolValue extends AbstractValidator
 {
+    /**
+     * @var string[]
+     */
+    protected $errorMessages = [
+        'notBool' => 'The given value is not a boolean value'
+    ];
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -47,6 +53,11 @@ class BoolValue extends AbstractValidator
 	 */
 	public function isValid($value): bool
 	{
-        return is_bool($value);
+        $isBool = is_bool($value);
+        if (false === $isBool) {
+            $this->setLastErrorMessage('notBool');
+        }
+
+        return $isBool;
 	}
 }
