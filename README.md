@@ -10,11 +10,12 @@ composer require district5/validators
 ## Usage
 ### General
 Most validator work in the same way:
+
 ```php
 $validValue = true;
 $invalidValue = 'Hello';
 
-$validator = new \District5\Validator\BoolValue();
+$validator = new \District5\Validators\BoolValue();
 
 $validator->isValid($validValue);   // true
 $validator->isValid($invalidValue);   // false
@@ -24,14 +25,15 @@ Some validators have configuration options that can be specified at construction
 
 ### EmailAddress
 Validate an email address:
+
 ```php
 <?php
 // Simple format check:
-$validator = new \District5\Validator\EmailAddress();
+$validator = new \District5\Validators\EmailAddress();
 $validator->isValid('foo@gmail.com'); // true
 
 // Deeper check, which includes MX record lookup:
-$validator = new \District5\Validator\EmailAddress(
+$validator = new \District5\Validators\EmailAddress(
     ['deep' => true]
 );
 
