@@ -30,20 +30,22 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is a long
  *
  * @author District5
  * @package District5\Validator
  */
-class Long extends A
+class Long extends AbstractValidator
 {
     /**
      * (non-PHPdoc)
      *
      * @see \District5\Validators\I::isValid()
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (is_long($value)) {
             return true;

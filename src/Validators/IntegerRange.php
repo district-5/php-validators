@@ -76,7 +76,7 @@ class IntegerRange extends Integer
      *
      * @see \District5\Validators\Numeric::isValid()
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!parent::isValid($value)) {
             return false;

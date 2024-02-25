@@ -30,13 +30,15 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is in the format of a url
  *
  * @author District5
  * @package District5\Validator
  */
-class URL extends A
+class URL extends AbstractValidator
 {
     protected static $SCHEME_PATTERN = '/^[a-z][a-z0-9+\.-]*$/Di';
 
@@ -125,7 +127,7 @@ class URL extends A
      *
      * @see \District5\Validators\I::isValid()
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if ($value === null || $value === "") {
             return false;

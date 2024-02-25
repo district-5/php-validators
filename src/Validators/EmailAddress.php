@@ -30,6 +30,8 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Integrated into validator structure from EmailAddressValidator Class
  * ------------------------------------------------------------
@@ -42,7 +44,7 @@ namespace District5\Validators;
  * @author District5
  * @package District5\Validator
  */
-class EmailAddress extends A
+class EmailAddress extends AbstractValidator
 {
     /**
      * @var bool
@@ -66,7 +68,7 @@ class EmailAddress extends A
 	 *
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 	    $isValid = $this->check_email_address($value);
 	    if ($isValid === false) {

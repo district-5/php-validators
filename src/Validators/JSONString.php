@@ -30,20 +30,22 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is a JSON serialised string
  *
  * @author District5
  * @package District5\Validator
  */
-class JSONString extends A
+class JSONString extends AbstractValidator
 {
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
         if ($value === null) {
             return false;

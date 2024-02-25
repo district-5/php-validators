@@ -43,7 +43,7 @@ class IntegerPositive extends Integer
 	 *
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
         if (!parent::isValid($value)) {
             return false;

@@ -30,13 +30,15 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is in an array of string values
  *
  * @author District5
  * @package District5\Validator
  */
-class StringInArrayOfStrings extends A
+class StringInArrayOfStrings extends AbstractValidator
 {
     /**
      * @var array
@@ -47,7 +49,7 @@ class StringInArrayOfStrings extends A
      * @param mixed $value
      * @return bool
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (null == $value) {
             return false;

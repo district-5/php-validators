@@ -30,20 +30,22 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is numeric
  *
  * @author District5
  * @package District5\Validator
  */
-class Numeric extends A
+class Numeric extends AbstractValidator
 {
     /**
      * (non-PHPdoc)
      *
      * @see \District5\Validators\I::isValid()
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         return is_numeric($value);
     }

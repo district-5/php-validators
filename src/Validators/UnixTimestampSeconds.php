@@ -43,7 +43,7 @@ class UnixTimestampSeconds extends Integer
      *
      * @see \District5\Validators\I::isValid()
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (false === parent::isValid($value)) {
             return false;

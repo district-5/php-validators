@@ -30,6 +30,8 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is at least equal to a Major.Minor.Patch version number
  * i.e. '1.3.7' is at least '1.2.12'
@@ -37,7 +39,7 @@ namespace District5\Validators;
  * @author District5
  * @package District5\Validator
  */
-class StringVersionMajorMinorPatchGTE extends A
+class StringVersionMajorMinorPatchGTE extends AbstractValidator
 {
     /**
      * @var int
@@ -67,7 +69,7 @@ class StringVersionMajorMinorPatchGTE extends A
      *
      * @see \District5\Validators\I::isValid()
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $parts = explode('.', $value);
 

@@ -30,20 +30,22 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is hex value
  *
  * @author District5
  * @package District5\Validator
  */
-class Hex extends A
+class Hex extends AbstractValidator
 {
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		if (!is_string($value) && !is_int($value)) {
             return false;

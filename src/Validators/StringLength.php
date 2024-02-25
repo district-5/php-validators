@@ -30,13 +30,15 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is a string of a certain length
  *
  * @author District5
  * @package District5\Validator
  */
-class StringLength extends A
+class StringLength extends AbstractValidator
 {
 	/**
 	 * The minimum string length
@@ -97,7 +99,7 @@ class StringLength extends A
 	 *
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		if (!is_string($value)) {
             return false;

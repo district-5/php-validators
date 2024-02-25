@@ -30,13 +30,15 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is a string of a certain length
  *
  * @author District5
  * @package District5\Validator
  */
-class ImageUpload extends A
+class ImageUpload extends AbstractValidator
 {
     /**
      * @var int|null
@@ -101,7 +103,7 @@ class ImageUpload extends A
      *
      * @see \District5\Validators\I::isValid()
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         $this->_lastErrorMessageKey = 0;
         if ($value === null)

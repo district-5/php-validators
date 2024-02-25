@@ -56,7 +56,7 @@ class StringWithDashesAndUnderscores extends Regex
 	 *
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		return parent::isValid($value);
 	}

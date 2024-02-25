@@ -30,13 +30,15 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is an object with latitude and longitude properties
  *
  * @author District5
  * @package District5\Validator
  */
-class LatLonObject extends A
+class LatLonObject extends AbstractValidator
 {
     protected $_requiresHorizontalAccuracy = false;
 
@@ -58,7 +60,7 @@ class LatLonObject extends A
      *
      * @see \District5\Validators\I::isValid()
      */
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (null === $value) {
             $this->setLastErrorMessage('Missing value for lat lon object');

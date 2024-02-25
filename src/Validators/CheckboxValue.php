@@ -30,20 +30,22 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value consistent with one from a checkbox
  *
  * @author District5
  * @package District5\Validator
  */
-class CheckboxValue extends A
+class CheckboxValue extends AbstractValidator
 {
 	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
         return ($value == 'on' || $value == 'off');
 	}

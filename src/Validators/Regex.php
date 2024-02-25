@@ -30,13 +30,15 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value matches a regex
  *
  * @author District5
  * @package District5\Validator
  */
-class Regex extends A
+class Regex extends AbstractValidator
 {
 	/**
 	 * Regular expression pattern
@@ -76,7 +78,7 @@ class Regex extends A
 	 *
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
 		if (!is_string($value) && !is_int($value) && !is_float($value)) {
             return false;

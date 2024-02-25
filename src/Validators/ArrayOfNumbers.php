@@ -30,20 +30,22 @@
  */
 namespace District5\Validators;
 
+use \District5\Validator\AbstractValidator;
+
 /**
  * Validates whether a value is an array of numbers
  *
  * @author District5
  * @package District5\Validator
  */
-class ArrayOfNumbers extends A
+class ArrayOfNumbers extends AbstractValidator
 {
 	/**
 	 * (non-PHPdoc)
 	 * 
 	 * @see \District5\Validators\I::isValid()
 	 */
-	public function isValid($value)
+	public function isValid($value): bool
 	{
         if (!is_array($value))
             return false;
