@@ -45,16 +45,26 @@ class Regex extends AbstractValidator
 	 *
 	 * @var string
 	 */
-	protected $_pattern;
+	protected $pattern;
+
+    /**
+     * @var string[]
+     */
+    protected $errorMessages = [
+        'patternMismatch' => 'The given value does not match the given regex pattern',
+        'valueIncompatibility' => 'The given value must be a string, integer or float for pattern matching'
+    ];
 	
 	/**
 	 * Creates a new instance of Regex
 	 * 
 	 * @param string $pattern
 	 */
-	public function __construct($pattern, $options = array())
+	public function __construct($pattern = null, $options = [])
 	{
-		$this->setPattern($pattern);
+        if (null !== $pattern) {
+            $this->setPattern($pattern);
+        }
 
         parent::__construct($options);
 	}
@@ -62,15 +72,11 @@ class Regex extends AbstractValidator
 	/**
 	 * Sets the pattern option
 	 *
-	 * @param  string $pattern
-	 * 
-	 * @throws \InvalidArgumentException if there is a fatal error in pattern matching
-	 * @return Regex Provides a fluent interface
+	 * @param string $pattern
 	 */
-	public function setPattern($pattern)
+	public function setPattern(string $pattern): void
 	{
-		$this->_pattern = (string)$pattern;
-		return $this;
+		$this->pattern = $pattern;
 	}
 	
 	/**
@@ -81,17 +87,19 @@ class Regex extends AbstractValidator
 	public function isValid($value): bool
 	{
 		if (!is_string($value) && !is_int($value) && !is_float($value)) {
+            $this->setLastErrorMessage('valueIncompatibility');
             return false;
         }
 
-        $status = preg_match($this->_pattern, $value);
+        $status = preg_match($this->pattern, $value);
 		// TODO: is this correct, should 0 be mismatch, false be error??
         if ($status === false) {
-            $this->setLastErrorMessage('PATTERN_MISMATCH');
+            $this->setLastErrorMessage('patternMismatch');
             return false;
         }
 
         if (!$status) {
+            $this->setLastErrorMessage('patternMismatch');
             return false;
         }
 
