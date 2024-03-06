@@ -33,14 +33,13 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
- * Validates whether a value is an object with latitude and longitude properties
+ * LatLonObject
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is an object with latitude and longitude properties
  */
 class LatLonObject extends AbstractValidator
 {
-    protected $_requiresHorizontalAccuracy = false;
+    protected $requiresHorizontalAccuracy = false;
 
     /**
      * Creates a new instance of LatLonObject
@@ -48,9 +47,9 @@ class LatLonObject extends AbstractValidator
      * @param bool $requiresHorizontalAccuracy
      * @param array $options
      */
-    public function __construct($requiresHorizontalAccuracy = false, $options = array())
+    public function __construct(bool $requiresHorizontalAccuracy = false, array $options = [])
     {
-        $this->_requiresHorizontalAccuracy = $requiresHorizontalAccuracy;
+        $this->requiresHorizontalAccuracy = $requiresHorizontalAccuracy;
 
         parent::__construct($options);
     }
@@ -92,7 +91,7 @@ class LatLonObject extends AbstractValidator
                 return false;
             }
 
-            if ($this->_requiresHorizontalAccuracy === true) {
+            if ($this->requiresHorizontalAccuracy === true) {
                 if (property_exists($value, 'accuracy_horizontal')) {
                     $accuracyHorizontal = $value->accuracy_horizontal;
                 } else {
@@ -123,7 +122,7 @@ class LatLonObject extends AbstractValidator
                 return false;
             }
 
-            if ($this->_requiresHorizontalAccuracy === true) {
+            if ($this->requiresHorizontalAccuracy === true) {
                 if (array_key_exists('accuracy_horizontal', $value)) {
                     $accuracyHorizontal = $value['accuracy_horizontal'];
                 } else {
@@ -149,7 +148,7 @@ class LatLonObject extends AbstractValidator
             return false;
         }
 
-        if ($this->_requiresHorizontalAccuracy === true) {
+        if ($this->requiresHorizontalAccuracy === true) {
 
             if ($accuracyHorizontal === null) {
                 $this->setLastErrorMessage('Missing value for "accuracy_horizontal"');

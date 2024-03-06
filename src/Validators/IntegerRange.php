@@ -31,22 +31,29 @@
 namespace District5\Validators;
 
 /**
- * Validates whether a value is an integer and within a given range
+ * IntegerRange
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is an integer and within a given range
  */
 class IntegerRange extends Integer
 {
     /**
-     * @var int
+     * @var string[]
      */
-    protected $_min = null;
+    protected $errorMessages = [
+        'belowMin' => 'Value is below min value',
+        'aboveMax' => 'Value is above max value'
+    ];
 
     /**
      * @var int
      */
-    protected $_max = null;
+    protected $min = null;
+
+    /**
+     * @var int
+     */
+    protected $max = null;
 
     /**
      * Creates a new instance of IntRange
@@ -61,11 +68,11 @@ class IntegerRange extends Integer
             throw new \InvalidArgumentException('A min or a max value must be set for validation');
         }
 
-        if (!isset($this->_min) && array_key_exists('min', $options)) {
-            $this->_min = $options['min'];
+        if (!isset($this->min) && array_key_exists('min', $options)) {
+            $this->min = $options['min'];
         }
-        if (!isset($this->_max) && array_key_exists('max', $options)) {
-            $this->_max = $options['max'];
+        if (!isset($this->max) && array_key_exists('max', $options)) {
+            $this->max = $options['max'];
         }
         
         parent::__construct($options);
@@ -82,13 +89,13 @@ class IntegerRange extends Integer
             return false;
         }
         
-        if (null !== $this->_min && $value < $this->_min) {
-        	$this->setLastErrorMessage('too_short');
+        if (null !== $this->min && $value < $this->min) {
+        	$this->setLastErrorMessage('belowMin');
             return false;
         }
         
-        if (null !== $this->_max && $value > $this->_max) {
-        	$this->setLastErrorMessage('too_long');
+        if (null !== $this->max && $value > $this->max) {
+        	$this->setLastErrorMessage('aboveMax');
             return false;
         }
         

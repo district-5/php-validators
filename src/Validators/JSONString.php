@@ -33,10 +33,9 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
- * Validates whether a value is a JSON serialised string
+ * JSONString
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is a JSON serialised string
  */
 class JSONString extends AbstractValidator
 {

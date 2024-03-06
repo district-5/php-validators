@@ -33,10 +33,9 @@ namespace District5\Validators;
 use \District5\Validator\AbstractValidator;
 
 /**
- * Validates whether a value is a string of a certain length
+ * ImageUpload
  *
- * @author District5
- * @package District5\Validator
+ * Validates whether a value is a string of a certain length
  */
 class ImageUpload extends AbstractValidator
 {
@@ -106,40 +105,35 @@ class ImageUpload extends AbstractValidator
     public function isValid($value): bool
     {
         $this->_lastErrorMessageKey = 0;
-        if ($value === null)
-        {
+        if ($value === null) {
             $this->_errorMessages = ['The file you tried to upload failed.'];
             return false;
         }
 
         $requiredKeys = ['error', 'name', 'tmp_name', 'size', 'type'];
-        foreach ($requiredKeys as $requiredKey)
-        {
-            if (!array_key_exists($requiredKey, $value))
-            {
+        foreach ($requiredKeys as $requiredKey) {
+
+            if (!array_key_exists($requiredKey, $value)) {
                 $this->_errorMessages = ['The file you tried to upload failed.'];
                 return false;
             }
         }
 
-        if ($value['error'] !== UPLOAD_ERR_OK)
-        {
+        if ($value['error'] !== UPLOAD_ERR_OK) {
             $this->__processErrorCode($value['error']);
             return false;
         }
 
-        if (count($this->_extensions) > 0)
-        {
-            if ($this->__validateExtensions($value['name']) === false)
-            {
+        if (count($this->_extensions) > 0) {
+
+            if ($this->__validateExtensions($value['name']) === false) {
                 return false;
             }
         }
 
-        if (count($this->_contentTypes) > 0)
-        {
-            if (!in_array($value['type'], $this->_contentTypes))
-            {
+        if (count($this->_contentTypes) > 0) {
+
+            if (!in_array($value['type'], $this->_contentTypes)) {
                 $this->_errorMessages = [
                     sprintf(
                         'The file you upload was an invalid type. Only %s are allowed.',
@@ -151,8 +145,7 @@ class ImageUpload extends AbstractValidator
         }
 
         $fileInfo = @getimagesize($value['tmp_name']);
-        if (!$fileInfo)
-        {
+        if (!$fileInfo) {
             $this->_errorMessages = [
                 sprintf(
                     'The file you upload was an invalid type. Only %s are allowed.',
@@ -161,10 +154,9 @@ class ImageUpload extends AbstractValidator
             ];
         }
 
-        if ($this->_width !== null)
-        {
-            if ((int)$fileInfo[0] !== (int)$this->_width)
-            {
+        if ($this->_width !== null) {
+
+            if ((int)$fileInfo[0] !== (int)$this->_width) {
                 $this->_errorMessages = [
                     sprintf(
                         'The image width must be %spx',
@@ -175,10 +167,9 @@ class ImageUpload extends AbstractValidator
             }
         }
 
-        if ($this->_height !== null)
-        {
-            if ((int)$fileInfo[1] !== (int)$this->_height)
-            {
+        if ($this->_height !== null) {
+
+            if ((int)$fileInfo[1] !== (int)$this->_height) {
                 $this->_errorMessages = [
                     sprintf(
                         'The image height must be %spx',
