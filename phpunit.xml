@@ -20,8 +20,8 @@
     bootstrap="vendor/autoload.php"
     verbose="false">
     <testsuites>
-        <testsuite name="All Validator Tests">
-            <directory>tests/ValidatorTests</directory>
+        <testsuite name="AllValidatorsTests">
+            <directory>tests/ValidatorsTests</directory>
         </testsuite>
     </testsuites>
 
@@ -29,7 +29,7 @@
         <whitelist>
             <directory>src/Validators</directory>
             <exclude>
-                <directory>tests/ValidatorTests</directory>
+                <directory>tests/ValidatorsTests</directory>
             </exclude>
         </whitelist>
     </filter>

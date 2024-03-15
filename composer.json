@@ -3,30 +3,24 @@
   "description": "District5 Validators Library",
   "keywords": ["php", "district5", "validators"],
   "homepage": "https://github.com/district-5/php-validators",
-  "license": "MIT",
+  "license": "mit",
   "authors": [
     {
       "name": "District5",
       "email": "hello@district5.co.uk"
     }
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:district-5/php-validator.git"
-    }
-  ],
   "require": {
-    "php": ">=5.4.0",
-    "district5/validator": ">=1.0.3"
+    "php": ">=7.1",
+    "district5/validator": "2.*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7"
+    "phpunit/phpunit": "9.*"
   },
   "autoload": {
-    "psr-4": { "District5\\": "src/" }
+    "psr-4": { "District5\\Validators\\": "src/Validators/" }
   },
   "autoload-dev": {
-    "psr-4": { "District5Tests\\": "tests/ValidatorTests" }
+    "psr-4": { "District5Tests\\ValidatorsTests\\": "tests/ValidatorsTests/" }
   }
 }
