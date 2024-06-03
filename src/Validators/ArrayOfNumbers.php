@@ -41,9 +41,16 @@ use District5\Validators\Numeric as NumericValidator;
 class ArrayOfNumbers extends AbstractValidator
 {
     /**
+     * @var string[]
+     */
+    protected $errorMessages = [
+        'notArray' => 'The given value is not an array'
+    ];
+
+    /**
      * @var NumericValidator
      */
-    private $numericValidator;
+    private NumericValidator $numericValidator;
 
     public function __construct(array $options = [])
     {
@@ -60,6 +67,7 @@ class ArrayOfNumbers extends AbstractValidator
 	public function isValid($value): bool
 	{
         if (!is_array($value)) {
+            $this->setLastErrorMessage('notArray');
             return false;
         }
 
@@ -77,6 +85,22 @@ class ArrayOfNumbers extends AbstractValidator
      */
     public function getLastErrorMessage(): ?string
     {
-        $this->numericValidator->getLastErrorMessage();
+        if (null === $this->lastErrorMessageKey) {
+            return $this->numericValidator->getLastErrorMessage();
+        }
+
+        parent::getLastErrorMessage();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLastErrorMessageKey(): ?string
+    {
+        if (null === $this->lastErrorMessageKey) {
+            return $this->numericValidator->getLastErrorMessageKey();
+        }
+
+        return parent::getLastErrorMessageKey();
     }
 }
