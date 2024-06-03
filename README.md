@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/gh/district-5/php-validators/graph/badge.svg?token=E225X7GK00)](https://codecov.io/gh/district-5/php-validators)
 # Validators
 A collection of validators implementing / extending the [District5 Validator](https://github.com/district-5/php-validator) library.
 
