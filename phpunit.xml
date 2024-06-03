@@ -1,39 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit
-    backupGlobals="true"
-    backupStaticAttributes="false"
-    cacheTokens="false"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    forceCoversAnnotation="false"
-    processIsolation="false"
-    stopOnError="false"
-    stopOnFailure="false"
-    stopOnIncomplete="false"
-    stopOnSkipped="false"
-    timeoutForSmallTests="1"
-    timeoutForMediumTests="10"
-    timeoutForLargeTests="60"
-    bootstrap="vendor/autoload.php"
-    verbose="false">
-    <testsuites>
-        <testsuite name="AllValidatorsTests">
-            <directory>tests/ValidatorsTests</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>src/Validators</directory>
-            <exclude>
-                <directory>tests/ValidatorsTests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="testdox-html" target="build/testdox.html"/>
-    </logging>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="true" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" forceCoversAnnotation="false" processIsolation="false" stopOnError="false" stopOnFailure="false" stopOnIncomplete="false" stopOnSkipped="false" timeoutForSmallTests="1" timeoutForMediumTests="10" timeoutForLargeTests="60" bootstrap="vendor/autoload.php" verbose="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory>src/Validators</directory>
+    </include>
+    <exclude>
+      <directory>tests/ValidatorsTests</directory>
+    </exclude>
+  </coverage>
+  <testsuites>
+    <testsuite name="AllValidatorsTests">
+      <directory>tests/ValidatorsTests</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <testdoxHtml outputFile="build/testdox.html"/>
+  </logging>
 </phpunit>
