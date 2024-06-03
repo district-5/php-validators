@@ -17,11 +17,13 @@ jobs:
 
       - name: Run unit tests
         uses: php-actions/phpunit@v3
+        env:
+          XDEBUG_MODE: coverage
         with:
           version: 9.6
           php_version: 8.1
           php_extensions: "xdebug"
-          args: "-d date.timezone=UTC"
+          args: "-d date.timezone=UTC --coverage-clover ./coverage.xml"
           configuration: phpunit.xml
           testsuite: AllValidatorsTests
 
@@ -29,3 +31,5 @@ jobs:
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          verbose: true
