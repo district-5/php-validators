@@ -40,8 +40,8 @@ class StringOfDefinedCharacters extends Regex
 {
 	protected string $allowedCharactersStr;
 
-	protected static $PATTERN_PREPENDER = '/^[';
-	protected static $PATTERN_APPENDER = ']{1,}$/';
+	private static string $PATTERN_PREPENDER = '/^[';
+	private static string $PATTERN_APPENDER = ']{1,}$/';
 	
 	/**
 	 * Creates a new instance of StringOfDefinedCharacters
