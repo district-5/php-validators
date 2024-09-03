@@ -19,6 +19,13 @@ class EmailAddressTest extends TestCase
         $this->assertTrue($instance->isValid('foo@gmail.com'));
     }
 
+    public function testInvalidSimple()
+    {
+        $instance = new EmailAddress();
+        $this->assertFalse($instance->isValid('foo@bar'));
+        $this->assertFalse($instance->isValid('foo@gmail'));
+    }
+
     public function testValidDeep()
     {
         $instance = new EmailAddress(
