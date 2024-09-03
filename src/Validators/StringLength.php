@@ -61,15 +61,12 @@ class StringLength extends AbstractValidator
      *
      * @throws \InvalidArgumentException
 	 */
-	public function __construct($options = array())
+	public function __construct(array $options = [])
 	{
 		if (!isset($options['exact']) && !(isset($options['min']) || isset($options['max']))) {
             throw new \InvalidArgumentException('Either an "exact" value or "min" and|or "max" values must be set');
         }
 		
-//		if (!isset($options['exact']) && !isset($options['max']))
-//			throw new \InvalidArgumentException('Either an "exact" value or "min" and|or "max" values must be set');
-
 		if (isset($options['exact'])) {
 			$this->_min = $options['exact'];
 			$this->_max = $options['exact'];
@@ -88,8 +85,8 @@ class StringLength extends AbstractValidator
             throw new \InvalidArgumentException('No values for "min" or "max" have been set');
         }
 
-        $this->_errorMessages['too_short'] = 'Value is below the minimum string length';
-        $this->_errorMessages['too_long'] = 'Value exceeds the maximum string length';
+        $this->errorMessages['tooShort'] = 'Value is below the minimum string length';
+        $this->errorMessages['tooLong'] = 'Value exceeds the maximum string length';
 
 		parent::__construct($options);
 	}
@@ -108,12 +105,12 @@ class StringLength extends AbstractValidator
 		$len = strlen($value);
 		
 		if (null !== $this->_max && $len > $this->_max) {
-			$this->setLastErrorMessage('too_long');
+			$this->setLastErrorMessage('tooLong');
 			return false;
 		}
 		
 		if (null !== $this->_min && $len < $this->_min) {
-			$this->setLastErrorMessage('too_short');
+			$this->setLastErrorMessage('tooShort');
 			return false;
 		}
 
