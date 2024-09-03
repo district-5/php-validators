@@ -42,9 +42,9 @@ use \District5\Validator\AbstractValidator;
 class StringVersionMajorMinorPatchGTE extends AbstractValidator
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $min;
+    protected string $min;
 
     /**
      * Creates a new instance of StringVersionMajorMinorPatchGTE
