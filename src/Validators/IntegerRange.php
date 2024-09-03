@@ -40,7 +40,7 @@ class IntegerRange extends Integer
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'belowMin' => 'Value is below min value',
         'aboveMax' => 'Value is above max value'
     ];

@@ -42,7 +42,7 @@ class Hex extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'notHex' => 'The given value is not hexadecimal',
         'valueIncompatibility' => 'The given value must be a string or integer'
     ];

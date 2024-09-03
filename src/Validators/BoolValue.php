@@ -42,7 +42,7 @@ class BoolValue extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'notBool' => 'The given value is not a boolean value'
     ];
 

@@ -50,7 +50,7 @@ class Regex extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'patternMismatch' => 'The given value does not match the given regex pattern',
         'valueIncompatibility' => 'The given value must be a string, integer or float for pattern matching'
     ];

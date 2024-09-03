@@ -43,7 +43,7 @@ class ArrayOfNumbers extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'notArray' => 'The given value is not an array'
     ];
 
@@ -85,11 +85,12 @@ class ArrayOfNumbers extends AbstractValidator
      */
     public function getLastErrorMessage(): ?string
     {
-        if (null === $this->lastErrorMessageKey) {
+        $parentError = parent::getLastErrorMessage();
+        if (null === $parentError) {
             return $this->numericValidator->getLastErrorMessage();
         }
 
-        parent::getLastErrorMessage();
+        return $parentError;
     }
 
     /**
@@ -97,10 +98,11 @@ class ArrayOfNumbers extends AbstractValidator
      */
     public function getLastErrorMessageKey(): ?string
     {
-        if (null === $this->lastErrorMessageKey) {
+        $parentError = parent::getLastErrorMessageKey();
+        if (null === $parentError) {
             return $this->numericValidator->getLastErrorMessageKey();
         }
 
-        return parent::getLastErrorMessageKey();
+        return $parentError;
     }
 }
