@@ -43,7 +43,7 @@ class StringInArrayOfStrings extends AbstractValidator
     /**
      * @var array
      */
-    protected $_allowedStrings = array();
+    protected array $allowedStrings = [];
 
     /**
      * @param mixed $value
@@ -55,7 +55,7 @@ class StringInArrayOfStrings extends AbstractValidator
             return false;
         }
 
-        if (in_array($value, $this->_allowedStrings, true)) {
+        if (in_array($value, $this->allowedStrings, true)) {
             return true;
         }
 
