@@ -41,12 +41,12 @@ class NumericRange extends Numeric
     /**
      * @var int
      */
-    protected $_min;
+    protected $min;
 
     /**
      * @var int
      */
-    protected $_max;
+    protected $max;
 
     /**
      * Creates a new instance of NumericRange
@@ -55,18 +55,21 @@ class NumericRange extends Numeric
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($options = array())
+    public function __construct(array $options = array())
     {
-        if (!array_key_exists('min', $options) && !array_key_exists('max', $options)) {
+        if (!isset($options['min']) && !isset($options['max'])) {
             throw new \InvalidArgumentException('A min or a max value must be set for validation');
         }
 
-        if (!isset($this->_min) && array_key_exists('min', $options)) {
-            $this->_min = $options['min'];
+        if (!isset($this->min) && isset($options['min'])) {
+            $this->min = $options['min'];
         }
-        if (!isset($this->_max) && array_key_exists('max', $options)) {
-            $this->_max = $options['max'];
+        if (!isset($this->max) && isset($options['max'])) {
+            $this->max = $options['max'];
         }
+
+        $this->errorMessages['lessThan'] = 'Value less than lower range';
+        $this->errorMessages['moreThan'] = 'Value more than upper range';
         
         parent::__construct($options);
     }
@@ -82,13 +85,13 @@ class NumericRange extends Numeric
             return false;
         }
 
-        if (null !== $this->_min && $value < $this->_min) {
-            $this->setLastErrorMessage('too_short');
+        if (null !== $this->min && $value < $this->min) {
+            $this->setLastErrorMessage('lessThan');
             return false;
         }
 
-        if (null !== $this->_max && $value > $this->_max) {
-            $this->setLastErrorMessage('too_long');
+        if (null !== $this->max && $value > $this->max) {
+            $this->setLastErrorMessage('moreThan');
             return false;
         }
         

@@ -38,20 +38,20 @@ namespace District5\Validators;
  */
 class StringOfDefinedCharacters extends Regex
 {
-	protected $_allowedCharactersStr;
+	protected string $allowedCharactersStr;
 
-	protected static $PATTERN_PREPENDER = '/^[';
-	protected static $PATTERN_APPENDER = ']{1,}$/';
+	private static string $PATTERN_PREPENDER = '/^[';
+	private static string $PATTERN_APPENDER = ']{1,}$/';
 	
 	/**
 	 * Creates a new instance of StringOfDefinedCharacters
 	 * 
 	 * @param string $allowedCharactersStr
 	 */
-	public function __construct($allowedCharactersStr)
+	public function __construct(string $allowedCharactersStr)
 	{
-		$this->_allowedCharactersStr = $allowedCharactersStr;
+		$this->allowedCharactersStr = $allowedCharactersStr;
 
-		parent::__construct(static::$PATTERN_PREPENDER . $this->_allowedCharactersStr . static::$PATTERN_APPENDER);
+		parent::__construct(static::$PATTERN_PREPENDER . $this->allowedCharactersStr . static::$PATTERN_APPENDER);
 	}
 }

@@ -42,7 +42,7 @@ class Integer extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'notInt' => 'The given value is not an integer',
     ];
 

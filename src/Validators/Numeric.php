@@ -42,7 +42,7 @@ class Numeric extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'notNumeric' => 'The given value is not a numeric value'
     ];
 

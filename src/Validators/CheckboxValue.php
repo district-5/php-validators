@@ -42,7 +42,7 @@ class CheckboxValue extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'notCheckboxValue' => 'The given value is not a checkbox form item value'
     ];
 

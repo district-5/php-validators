@@ -48,7 +48,7 @@ class EmailAddress extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'generic' => 'Email address invalid',
         'dnsMxVerificationFailed' => 'Email address domain failed MX records lookup',
         'missingAtSymbol' => 'Email address is missing @ symbol',

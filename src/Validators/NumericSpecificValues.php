@@ -41,7 +41,7 @@ class NumericSpecificValues extends Numeric
     /**
      * @var array
      */
-    protected $_values = array();
+    protected $values = array();
 
     /**
      * Creates a new instance of NumericSpecificValues
@@ -50,13 +50,13 @@ class NumericSpecificValues extends Numeric
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($options = array())
+    public function __construct(array $options = [])
     {
-        if (!array_key_exists('values', $options) || !isset($options['values'])) {
-            throw new \InvalidArgumentException('A min value must be set for validation');
+        if (!isset($options['values'])) {
+            throw new \InvalidArgumentException('An array of values must be set for validation');
         }
 
-        $this->_values = $options['values'];
+        $this->values = $options['values'];
 
         parent::__construct($options);
     }
@@ -72,7 +72,7 @@ class NumericSpecificValues extends Numeric
             return false;
         }
 
-        foreach ($this->_values as $allowedValue) {
+        foreach ($this->values as $allowedValue) {
             if ($value === $allowedValue) {
                 return true;
             }

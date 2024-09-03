@@ -39,7 +39,7 @@ use \District5\Validator\AbstractValidator;
  */
 class LatLonObject extends AbstractValidator
 {
-    protected $requiresHorizontalAccuracy = false;
+    protected bool $requiresHorizontalAccuracy = false;
 
     /**
      * Creates a new instance of LatLonObject

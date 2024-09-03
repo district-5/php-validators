@@ -50,7 +50,7 @@ class Regex extends AbstractValidator
     /**
      * @var string[]
      */
-    protected $errorMessages = [
+    protected array $errorMessages = [
         'patternMismatch' => 'The given value does not match the given regex pattern',
         'valueIncompatibility' => 'The given value must be a string, integer or float for pattern matching'
     ];
@@ -92,13 +92,8 @@ class Regex extends AbstractValidator
         }
 
         $status = preg_match($this->pattern, $value);
-		// TODO: is this correct, should 0 be mismatch, false be error??
-        if ($status === false) {
-            $this->setLastErrorMessage('patternMismatch');
-            return false;
-        }
-
-        if (!$status) {
+		// false for error, 0 for not matched??
+        if ($status === false || $status === 0) {
             $this->setLastErrorMessage('patternMismatch');
             return false;
         }
