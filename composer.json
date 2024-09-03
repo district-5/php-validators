@@ -12,7 +12,7 @@
   ],
   "require": {
     "php": ">=7.4",
-    "district5/validator": "2.*"
+    "district5/validator": ">=2.1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "9.*"
