@@ -13,6 +13,27 @@ class StringVersionMajorMinorPatchGTETest extends TestCase
         $instance = new StringVersionMajorMinorPatchGTE();
     }
 
+    public function testInvalidNumberOfPartsTooFew()
+    {
+        $instance = new StringVersionMajorMinorPatchGTE(['min' => '1.0.0']);
+
+        $this->assertFalse($instance->isValid('1.0'));
+    }
+
+    public function testInvalidNumberOfPartsTooMany()
+    {
+        $instance = new StringVersionMajorMinorPatchGTE(['min' => '1.0.0']);
+
+        $this->assertFalse($instance->isValid('1.0.0.0'));
+    }
+
+    public function testInvalidPartsType()
+    {
+        $instance = new StringVersionMajorMinorPatchGTE(['min' => '1.0.0']);
+
+        $this->assertFalse($instance->isValid('1.0.hello'));
+    }
+
     public function testValidPatchGTE()
     {
         $instance = new StringVersionMajorMinorPatchGTE(['min' => '1.0.0']);
@@ -53,6 +74,20 @@ class StringVersionMajorMinorPatchGTETest extends TestCase
         $instance = new StringVersionMajorMinorPatchGTE(['min' => '1.0.0']);
 
         $this->assertFalse($instance->isValid('0.0.0'));
+    }
+
+    public function testLowerPatch()
+    {
+        $instance = new StringVersionMajorMinorPatchGTE(['min' => '3.2.1']);
+
+        $this->assertFalse($instance->isValid('3.2.0'));
+    }
+
+    public function testLowerMinor()
+    {
+        $instance = new StringVersionMajorMinorPatchGTE(['min' => '3.2.1']);
+
+        $this->assertFalse($instance->isValid('3.1.0'));
     }
 
     public function testSwitchoverToMinorGTE()
