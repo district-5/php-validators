@@ -44,7 +44,7 @@ class StringVersionMajorMinorPatchGTE extends AbstractValidator
     /**
      * @var int
      */
-    protected $_min;
+    protected $min;
 
     /**
      * Creates a new instance of StringVersionMajorMinorPatchGTE
@@ -53,13 +53,13 @@ class StringVersionMajorMinorPatchGTE extends AbstractValidator
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($options = array())
+    public function __construct(array $options = [])
     {
         if (!array_key_exists('min', $options)) {
             throw new \InvalidArgumentException('A min version number value must be set for validation');
         }
 
-        $this->_min = explode('.', $options['min']);
+        $this->min = explode('.', $options['min']);
 
         parent::__construct($options);
     }
@@ -81,27 +81,27 @@ class StringVersionMajorMinorPatchGTE extends AbstractValidator
             return false;
         }
 
-        if ((int)$parts[0] < (int)$this->_min[0]) {
+        if ((int)$parts[0] < (int)$this->min[0]) {
             // Major version number is less
             return false;
         }
 
-        if ((int)$parts[0] > (int)$this->_min[0]) {
+        if ((int)$parts[0] > (int)$this->min[0]) {
             // Major version number is greater than the minimum, no point checking further
             return true;
         }
 
-        if((int)$parts[1] < (int)$this->_min[1]) {
+        if((int)$parts[1] < (int)$this->min[1]) {
             // Major version number is the same, but minor version is less
             return false;
         }
 
-        if ((int)$parts[1] > (int)$this->_min[1]) {
+        if ((int)$parts[1] > (int)$this->min[1]) {
             // Major version number is the same, but minor is greater than, no point checking further
             return true;
         }
 
-        if ((int)$parts[2] < (int)$this->_min[2]) {
+        if ((int)$parts[2] < (int)$this->min[2]) {
             // Major and minor version are the same, but the patch version is less
             return false;
         }
