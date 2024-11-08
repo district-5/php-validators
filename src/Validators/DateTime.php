@@ -44,13 +44,5 @@ class DateTime extends Regex
      *
      * @var string
      */
-    protected static $PATTERN = '/^((19|20)\\d\\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3]):[0-5][0-9]$/';
-
-    /**
-     * Creates a new instance of DateTime
-     */
-    public function __construct($options = array())
-    {
-        parent::__construct(static::$PATTERN, $options);
-    }
+    protected $pattern = '/^((19|20)\\d\\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3]):[0-5][0-9]$/';
 }
