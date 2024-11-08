@@ -11,9 +11,15 @@ use PHPUnit\Framework\TestCase;
  */
 class NumericSpecificValuesTest extends TestCase
 {
+    public function testInvalidConfiguration()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $instance = new NumericSpecificValues([]);
+    }
+
     public function testSingleValue()
     {
-        $instance = new NumericSpecificValues(array('values' => [7]));
+        $instance = new NumericSpecificValues(['values' => [7]]);
 
         $this->assertTrue($instance->isValid(7));
 
@@ -22,7 +28,7 @@ class NumericSpecificValuesTest extends TestCase
 
     public function testMultipleValues()
     {
-        $instance = new NumericSpecificValues(array('values' => [7, 9, 11]));
+        $instance = new NumericSpecificValues(['values' => [7, 9, 11]]);
 
         $this->assertTrue($instance->isValid(7));
         $this->assertTrue($instance->isValid(9));
@@ -31,4 +37,3 @@ class NumericSpecificValuesTest extends TestCase
         $this->assertFalse($instance->isValid(1));
     }
 }
-
