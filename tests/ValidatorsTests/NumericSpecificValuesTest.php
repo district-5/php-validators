@@ -36,4 +36,11 @@ class NumericSpecificValuesTest extends TestCase
 
         $this->assertFalse($instance->isValid(1));
     }
+
+    public function testMultipleValuesWithInvalidValue()
+    {
+        $instance = new NumericSpecificValues(['values' => [7, 9, 11]]);
+
+        $this->assertFalse($instance->isValid('hello'));
+    }
 }

@@ -27,4 +27,3 @@ class NumericTest extends TestCase
         $this->assertEquals('notNumeric', $instance->getLastErrorMessageKey());
     }
 }
-
