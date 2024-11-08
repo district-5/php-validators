@@ -11,6 +11,31 @@ use PHPUnit\Framework\TestCase;
  */
 class KeyValuePairTest extends TestCase
 {
+    public function testInvalidNullKVP()
+    {
+        $instance = new KeyValuePairList();
+
+        $this->assertFalse($instance->isValid(null));
+    }
+
+    public function testInvalidNotArrayKVP()
+    {
+        $instance = new KeyValuePairList();
+
+        $this->assertFalse($instance->isValid('hello'));
+    }
+
+    public function testInvalidKey()
+    {
+        $kvp = [
+            'k1!' => 1
+        ];
+
+        $instance = new KeyValuePairList();
+
+        $this->assertFalse($instance->isValid($kvp));
+    }
+
     public function testValidDefaultConfiguration()
     {
         $kvp = [
