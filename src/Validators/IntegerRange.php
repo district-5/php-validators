@@ -38,14 +38,6 @@ namespace District5\Validators;
 class IntegerRange extends Integer
 {
     /**
-     * @var string[]
-     */
-    protected array $errorMessages = [
-        'belowMin' => 'Value is below min value',
-        'aboveMax' => 'Value is above max value'
-    ];
-
-    /**
      * @var int
      */
     protected $min = null;
@@ -74,6 +66,9 @@ class IntegerRange extends Integer
         if (!isset($this->max) && array_key_exists('max', $options)) {
             $this->max = $options['max'];
         }
+
+        $this->errorMessages['lessThan'] = 'Value less than lower range';
+        $this->errorMessages['moreThan'] = 'Value more than upper range';
         
         parent::__construct($options);
     }
@@ -90,12 +85,12 @@ class IntegerRange extends Integer
         }
         
         if (null !== $this->min && $value < $this->min) {
-        	$this->setLastErrorMessage('belowMin');
+        	$this->setLastErrorMessage('lessThan');
             return false;
         }
         
         if (null !== $this->max && $value > $this->max) {
-        	$this->setLastErrorMessage('aboveMax');
+        	$this->setLastErrorMessage('moreThan');
             return false;
         }
         

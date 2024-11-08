@@ -53,16 +53,16 @@ class Integer extends AbstractValidator
 	 */
 	public function isValid($value): bool
 	{
-        if (is_int($value)) {
+        if (!is_int($value)) {
             $this->setLastErrorMessage('notInt');
-            return true;
+            return false;
         }
 
-        if (intval($value) == $value) {
+        if (intval($value) !== $value) {
             $this->setLastErrorMessage('notInt');
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
 	}
 }

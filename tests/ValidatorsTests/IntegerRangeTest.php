@@ -2,19 +2,19 @@
 
 namespace District5Tests\ValidatorsTests;
 
-use District5\Validators\NumericRange;
+use District5\Validators\IntegerRange;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class NumericRangeTest
+ * Class IntegerRangeTest
  * @package District5\ValidatorTests\Adapters
  */
-class NumericRangeTest extends TestCase
+class IntegerRangeTest extends TestCase
 {
     public function testInvalidConfiguration()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $instance = new NumericRange([]);
+        $instance = new IntegerRange([]);
     }
 
     public function testValidValue()
@@ -23,7 +23,7 @@ class NumericRangeTest extends TestCase
             'min' => 1,
             'max' => 10,
         ];
-        $instance = new NumericRange($options);
+        $instance = new IntegerRange($options);
 
         $this->assertTrue($instance->isValid(7));
         $this->assertNull($instance->getLastErrorMessageKey());
@@ -35,7 +35,7 @@ class NumericRangeTest extends TestCase
             'min' => 1,
             'max' => 10,
         ];
-        $instance = new NumericRange($options);
+        $instance = new IntegerRange($options);
 
         $this->assertFalse($instance->isValid(11));
         $this->assertEquals('moreThan', $instance->getLastErrorMessageKey());
@@ -47,19 +47,19 @@ class NumericRangeTest extends TestCase
             'min' => 10,
             'max' => 20,
         ];
-        $instance = new NumericRange($options);
+        $instance = new IntegerRange($options);
 
         $this->assertFalse($instance->isValid(5));
         $this->assertEquals('lessThan', $instance->getLastErrorMessageKey());
     }
 
-    public function testInvalidValueNotNumeric()
+    public function testInvalidValueNotInteger()
     {
         $options = [
             'min' => 10,
             'max' => 20,
         ];
-        $instance = new NumericRange($options);
+        $instance = new IntegerRange($options);
 
         $this->assertFalse($instance->isValid(true));
     }
