@@ -28,6 +28,25 @@ class URLTest extends TestCase
         $this->assertTrue($instance->isValid("ftp://www.district5.co.uk"));
     }
 
+    public function testValidURLOverriddenSchemes()
+    {
+        $instance = new URL([
+            'https',
+            'ssh'
+        ]);
+
+        $this->assertTrue($instance->isValid("https://www.district5.co.uk"));
+        $this->assertTrue($instance->isValid("ssh://www.district5.co.uk"));
+
+        $this->assertFalse($instance->isValid("http://www.district5.co.uk"));
+    }
+
+    public function testInvalidOverriddenSchemes()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $instance = new URL([]);
+    }
+
     public function testInvalidURLBadScheme()
     {
         $instance = new URL();
