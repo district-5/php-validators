@@ -41,10 +41,16 @@ class URLTest extends TestCase
         $this->assertFalse($instance->isValid("http://www.district5.co.uk"));
     }
 
-    public function testInvalidOverriddenSchemes()
+    public function testInvalidEmptyOverriddenSchemes()
     {
         $this->expectException(\InvalidArgumentException::class);
         $instance = new URL([]);
+    }
+
+    public function testInvalidOverrideScheme()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $instance = new URL(['some_invalid_scheme_type']);
     }
 
     public function testInvalidURLBadScheme()
@@ -59,5 +65,19 @@ class URLTest extends TestCase
         $instance = new URL();
 
         $this->assertFalse($instance->isValid("ssh://www.district5.co."));
+    }
+
+    public function testInvalidURLNull()
+    {
+        $instance = new URL();
+
+        $this->assertFalse($instance->isValid(null));
+    }
+
+    public function testInvalidURLNotString()
+    {
+        $instance = new URL();
+
+        $this->assertFalse($instance->isValid(55));
     }
 }
