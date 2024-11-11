@@ -40,14 +40,14 @@ use \District5\Validator\AbstractValidator;
  */
 class URL extends AbstractValidator
 {
-    protected static $SCHEME_PATTERN = '/^[a-z][a-z0-9+\.-]*$/Di';
+    private const SCHEME_PATTERN = '/^[a-z][a-z0-9+\.-]*$/Di';
 
     /**
      * Based on the regex pattern by https://github.com/Fleshgrinder/php-url-validator
      *
      * @var string
      */
-    protected static $PATTERN = '/^
+    private const PATTERN = '/^
             (?\'scheme\'%s)
             :\/\/
             (?:
@@ -83,7 +83,7 @@ class URL extends AbstractValidator
             )?
         $/DiuUx';
 
-    protected $_allowedSchemes = array("http", "https", "ftp");
+    protected array $allowedSchemes = ["http", "https", "ftp"];
 
     /**
      * Creates a new instance of URL
@@ -104,7 +104,7 @@ class URL extends AbstractValidator
      *
      * @throws \InvalidArgumentException
      */
-    protected function setSchemes($allowedSchemes)
+    protected function setSchemes(array $allowedSchemes)
     {
         if (empty($allowedSchemes)) {
             throw new \InvalidArgumentException("Allowed schemes cannot be empty.");
@@ -114,12 +114,12 @@ class URL extends AbstractValidator
         for ($i = 0; $i < $c; ++$i) {
             if (empty($allowedSchemes[$i])) {
                 throw new \InvalidArgumentException("An allowed scheme cannot be empty.");
-            } elseif (!preg_match(static::$SCHEME_PATTERN, $allowedSchemes[$i])) {
+            } elseif (!preg_match(static::SCHEME_PATTERN, $allowedSchemes[$i])) {
                 throw new \InvalidArgumentException("Allowed scheme [{$allowedSchemes[$i]}] contains illegal characters (see RFC3986).");
             }
         }
 
-        $this->_allowedSchemes = $allowedSchemes;
+        $this->allowedSchemes = $allowedSchemes;
     }
 
     /**
@@ -144,7 +144,7 @@ class URL extends AbstractValidator
             return false;
         }
 
-        if (!preg_match(sprintf(static::$PATTERN, implode("|", $this->_allowedSchemes)), $value, $matches)) {
+        if (!preg_match(sprintf(static::PATTERN, implode("|", $this->allowedSchemes)), $value, $matches)) {
 //            throw new \InvalidArgumentException("URL [{$url}] is invalid.");
             return false;
         }
