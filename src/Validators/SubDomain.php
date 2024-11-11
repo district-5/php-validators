@@ -40,22 +40,26 @@ class SubDomain extends Regex
 {
     /**
      * Based on the regex pattern http://www.mkyong.com/regular-expressions/domain-name-regular-expression-example/
-     * modified to remove the final restriction {2,6} on the TLD, as longer TLD's are now available
+     * modified to remove the final restriction {2,6} on the TLD, as longer TLD's are now available.
+     *
+     * Single Level is for a single part, ie the 'test' part of 'test.example.com'. In practise this isnt as useful as the multi-level validation.
      *
      * @var string
      */
-    protected static $PATTERN_SINGLE_LEVEL = '/^(?!-)[A-Za-z0-9-]{1,63}(?<!-)$/';
-    protected static $PATTERN_MULTI_LEVEL = '/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+$/';
+    protected const PATTERN_SINGLE_LEVEL = '/^(?!-)[A-Za-z0-9-]{1,63}(?<!-)$/';
+    protected const PATTERN_MULTI_LEVEL = '/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,}$/';
 
     /**
      * Creates a new instance of SubDomain
+     *
+     * @param bool $singleLevel
      */
     public function __construct($singleLevel = true)
     {
         if (true === $singleLevel) {
-            parent::__construct(static::$PATTERN_SINGLE_LEVEL);
+            parent::__construct(static::PATTERN_SINGLE_LEVEL);
         } else {
-            parent::__construct(static::$PATTERN_MULTI_LEVEL);
+            parent::__construct(static::PATTERN_MULTI_LEVEL);
         }
     }
 }
