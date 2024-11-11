@@ -11,6 +11,12 @@ use PHPUnit\Framework\TestCase;
  */
 class StringLengthTest extends TestCase
 {
+    public function testInvalidConfiguration()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $instance = new StringLength([]);
+    }
+
     public function testValidExactValue()
     {
         $instance = new StringLength(['exact' => 4]);

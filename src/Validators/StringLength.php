@@ -81,10 +81,6 @@ class StringLength extends AbstractValidator
             }
 		}
 
-        if (null === $this->_min && null === $this->_max) {
-            throw new \InvalidArgumentException('No values for "min" or "max" have been set');
-        }
-
         $this->errorMessages['tooShort'] = 'Value is below the minimum string length';
         $this->errorMessages['tooLong'] = 'Value exceeds the maximum string length';
 

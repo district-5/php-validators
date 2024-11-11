@@ -41,23 +41,5 @@ class StringWithDashesDotsAndUnderscores extends Regex
 	/**
 	 * @var string
 	 */
-	protected $_patternToMatch = '/^[0-9a-zA-Z_\-\.]{1,}$/';
-	
-	/**
-	 * Creates a new instance of StringWithDashesDotsAndUnderscores
-	 */
-	public function __construct()
-	{
-		parent::__construct($this->_patternToMatch);
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 *
-	 * @see \District5\Validators\I::isValid()
-	 */
-	public function isValid($value): bool
-	{
-		return parent::isValid($value);
-	}
+	protected $pattern = '/^[0-9a-zA-Z_\-\.]{1,}$/';
 }

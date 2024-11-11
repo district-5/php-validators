@@ -30,19 +30,14 @@
  */
 namespace District5\Validators;
 
-/**
- * Validates whether a value is in the format of a DateTime
- *
- * @author District5
- * @package District5\Validator
- */
-class DateTime extends Regex
+class StringWithDashesAndDotsRestrictedFirstAndLastNoDoubleSeparators extends Regex
 {
-    /**
-     * Based on the regex pattern http://www.mkyong.com/regular-expressions/how-to-validate-date-with-regular-expression/
-     * modified to re-order date for YYYY-MM-DD HH:MM
-     *
-     * @var string
-     */
-    protected $pattern = '/^((19|20)\\d\\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3]):[0-5][0-9]$/';
+    protected $pattern = '/^(?!\d)(?!\.)(?!-)(?!.*\.$)(?!.*-$)(?!.*?\.\.)(?!.*?--)[a-z0-9-.]+$/';
+
+    public function __construct()
+    {
+        parent::__construct(null, []);
+
+        $this->errorMessages['patternMismatch'] = 'The given value does not conform to the allowed pattern (lowercase alphanumeric characters with . and - support, no . or - start or double occurrences)';
+    }
 }
